@@ -14,6 +14,9 @@ export async function middleware(request: NextRequest) {
 
   const storageType = process.env.NEXT_PUBLIC_STORAGE_TYPE || 'localstorage';
 
+  if (storageType === 'localstorage' && !process.env.PASSWORD) {
+    return NextResponse.next();
+  }
   // if (!process.env.PASSWORD) {
   //   // 如果没有设置密码，重定向到警告页面
   //   const warningUrl = new URL('/warning', request.url);
